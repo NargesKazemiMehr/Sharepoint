@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "sp-online-crud-using-pn-p-js-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/spOnlineCrudUsingPnPJs/SpOnlineCrudUsingPnPJsWebPart.js",
+          "manifest": "./src/webparts/spOnlineCrudUsingPnPJs/SpOnlineCrudUsingPnPJsWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "SpOnlineCrudUsingPnPJsWebPartStrings": "lib/webparts/spOnlineCrudUsingPnPJs/loc/{locale}.js"
+  }
+}
