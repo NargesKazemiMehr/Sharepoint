@@ -70,42 +70,57 @@ export default class SpOnlineCrudUsingPnPJsWebPart extends BaseClientSideWebPart
     if (items.length > 0) {
 
       items.forEach((item: ISPList) => {
-    pnp.sp.web.lists.getByTitle("Orders").items.getById(+item.ID).select("Status","CustomerName/Title","Owner/Title").expand("CustomerName","Owner").get().then((Myitems: any[]) => {
-      console.log(Myitems);
-      if( Myitems["CustomerName"]!==undefined  || Myitems["Owner"]!==undefined  ) {
-        html += `
-        <tr>
-        <td>  <input type="radio" id="ID" name="ID" value="${item.ID}"> <br> </td>
-        <td>${item.ID}</td>
-        <td>${item.Title}</td>
-        <td>${item.OrderNumber}</td>
-        <td>${Myitems["CustomerName"].Title}</td>
-        <td>${item.Destination}</td>
-        <td>${Myitems["Owner"].Title}</td>
-        <td>${Myitems["Status"].Title}</td>
-      </tr>
-      `;
-      }
-      else{
-      html += `
-      <tr>
-      <td>  <input type="radio" id="ID" name="ID" value="${item.ID}"> <br> </td>
-      <td>${item.ID}</td>
-      <td>${item.Title}</td>
-      <td>${item.OrderNumber}</td>
-      <td>""</td>
-      <td>${item.Destination}</td>
-      <td>""</td>
-      <td>""</td>
-    </tr>
-    `;
-  }
-  });
+  //   pnp.sp.web.lists.getByTitle("Orders").items.getById(+item.ID).select("Status","CustomerName/Title","Owner/Title").expand("CustomerName","Owner").get().then((Myitems: any[]) => {
+  //     console.log(Myitems);
+  //     if( Myitems["CustomerName"]!==undefined  || Myitems["Owner"]!==undefined  ) {
+  //       html += `
+  //       <tr>
+  //       <td>  <input type="radio" id="ID" name="ID" value="${item.ID}"> <br> </td>
+  //       <td>${item.ID}</td>
+  //       <td>${item.Title}</td>
+  //       <td>${item.OrderNumber}</td>
+  //       <td>${Myitems["CustomerName"].Title}</td>
+  //       <td>${item.Destination}</td>
+  //       <td>${Myitems["Owner"].Title}</td>
+  //       <td>${Myitems["Status"].Title}</td>
+  //     </tr>
+  //     `;
+  //     }
+  //     else{
+  //     html += `
+  //     <tr>
+  //     <td>  <input type="radio" id="ID" name="ID" value="${item.ID}"> <br> </td>
+  //     <td>${item.ID}</td>
+  //     <td>${item.Title}</td>
+  //     <td>${item.OrderNumber}</td>
+  //     <td>""</td>
+  //     <td>${item.Destination}</td>
+  //     <td>""</td>
+  //     <td>""</td>
+  //   </tr>
+  //   `;
+  // }
+  html += `
+  <tr>
+  <td>  <input type="radio" id="ID" name="ID" value="${item.ID}"> <br> </td>
+  <td>${item.ID}</td>
+  <td>${item.Title}</td>
+  <td>${item.OrderNumber}</td>
+  <td></td>
+  <td>${item.Destination}</td>
+  <td></td>
+  <td></td>
+</tr>
+`;
+      
+  //});
+  
        });
     }
     else {
       html += "No records...";
     }
+    
     html += `</table>`;
       const listContainer: Element = this.domElement.querySelector('#DivGetItems');
       listContainer.innerHTML = html;
@@ -129,14 +144,15 @@ export default class SpOnlineCrudUsingPnPJsWebPart extends BaseClientSideWebPart
       <div style="background-color:Black;color:white;text-align: center;font-weight: bold;font-size:
 
   x;">Orders Details</div>
-    </div>                <button id="UpdateItemInSPList" type="submit" >Update</button>
+    </div>               
 
     <div style="background-color: white" >
         <form onSubmit={this.handleSubmit}>
             <br>
             <div data-role="main" class="ui-content">
               <div >
-              <input id="Title"  placeholder="Title"/>
+              Title:<br>
+              <input id="Title"  placeholder="Title"/><br>
               OrderNumber:<br>
                 <input id="OrderNumber" style="width: 100%;"/><br>
                 Customer Name:<br>
@@ -147,7 +163,7 @@ export default class SpOnlineCrudUsingPnPJsWebPart extends BaseClientSideWebPart
                 <input id="Owner" style="width: 100%;"/><br>
                 <button id="AddItemToSPList"  type="submit" >Add</button>
                 <input type="file" id="Attachment" name="Attachment"/><br><br>
-
+                <button id="UpdateItemInSPList" type="submit" >Update</button>
                 <button id="DeleteItemFromSPList"  type="submit" >Delete</button>
                 </div>
             </div>
@@ -165,12 +181,12 @@ export default class SpOnlineCrudUsingPnPJsWebPart extends BaseClientSideWebPart
   AddSPListItem() {
     pnp.sp.web.lists.getByTitle('Orders').items.add({
       Title: document.getElementById('Title')["value"],
-      OrderNumber: document.getElementById('OrderNumber')["value"],
-      CustomerName: document.getElementById('CustomerName')["value"],
-      Destination: document.getElementById('Destination')["value"],
-      Owner: document.getElementById('Owner')["value"],
+       OrderNumber: document.getElementById('OrderNumber')["value"],
+      // CustomerName: document.getElementById('CustomerName')["value"],
+      // Destination: document.getElementById('Destination')["value"],
+      // Owner: document.getElementById('Owner')["value"],
     });
-    this.AttachmentSPItem();
+    //this.AttachmentSPItem();
     alert("Record with Orders Name : " + document.getElementById('Title')["value"] + " Added !");
   }
 
